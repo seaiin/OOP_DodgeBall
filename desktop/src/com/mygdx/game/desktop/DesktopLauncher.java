@@ -7,6 +7,8 @@ import com.mygdx.game.DodgeBall;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.width = DodgeBall.WIDTH;
+		config.height = DodgeBall.HEIGHT;
 		new LwjglApplication(new DodgeBall(), config);
 	}
 }
