@@ -55,7 +55,7 @@ public class Ball {
 		return currentDirection == nextDirection;
 	}
 	
-	public boolean isOnGruund() {
+	public boolean isOnGround() {
 		return currentDirection == DIRECTION_STILL;
 	}
 	

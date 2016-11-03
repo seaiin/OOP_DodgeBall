@@ -13,6 +13,7 @@ public class Player {
 	private int currentDirection;
 	private int nextDirection;	
 	private World world;
+	private Ball ball;
 	private static final int [][] DIR_OFFSETS = new int[][] {
 		{0,0},
 		{0,-1},
@@ -54,5 +55,16 @@ public class Player {
 	private boolean canMoveInDirection(int dir) {
 		Map map = world.getMap();
 		return true;
+	}
+	
+	public boolean isHoldBall() {
+		return true;
+	}
+	
+	private void pickBall() {
+		Ball ball = world.getBall();
+		if(ball.isOnGround()){
+			
+		}
 	}
 }
