@@ -51,14 +51,6 @@ public class Ball {
 		nextDirection = dir;
 	}
 	
-	public boolean isThrowed(Player player) {
-		return currentDirection == nextDirection;
-	}
-	
-	public boolean isOnGround() {
-		return currentDirection == DIRECTION_STILL;
-	}
-	
 	public boolean isHolded(Player player) {
 		return position.x == player.getPosition().x + 20 && position.y == player.getPosition().y - 20;
 	}
