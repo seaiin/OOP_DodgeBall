@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 
 public class Ball {
@@ -9,7 +11,7 @@ public class Ball {
 	public static final int DIRECTION_DOWN = 3;
 	public static final int DIRECTION_LEFT = 4;
 	public static final int DIRECTION_STILL = 0;
-	public static final int SPEED = 5;
+	public static int SPEED;
 	private int currentDirection;
 	private int nextDirection;
 	private World world;
@@ -41,7 +43,13 @@ public class Ball {
 	public void  update() {
 		Map map = world.getMap();
 		if(canMoveInDirection(nextDirection)) {
-			
+			if(isOnGround() && Gdx.input.isKeyPressed(Keys.TAB)) {
+				position.x = player.getPosition().x + 20;
+				position.y = player.getPosition().y - 20;
+			}
+			if(isHolded(player)) {
+				System.out.println("Hold");
+			}
 		} else {
 			currentDirection = DIRECTION_STILL;
 		}
@@ -51,12 +59,16 @@ public class Ball {
 		nextDirection = dir;
 	}
 	
+	public boolean isOnGround() {
+		return currentDirection == DIRECTION_STILL;
+	}
+	
 	public boolean isHolded(Player player) {
 		return position.x == player.getPosition().x + 20 && position.y == player.getPosition().y - 20;
 	}
 	
 	private boolean canMoveInDirection(int dir) {
 		Map map = world.getMap();
-		return false;
+		return true;
 	}
 }

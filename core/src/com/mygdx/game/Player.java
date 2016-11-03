@@ -63,8 +63,6 @@ public class Player {
 	
 	private void pickBall() {
 		Ball ball = world.getBall();
-		if(ball.isOnGround()){
-			
-		}
+		
 	}
 }
