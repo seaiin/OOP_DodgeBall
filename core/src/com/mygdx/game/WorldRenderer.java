@@ -10,6 +10,7 @@ public class WorldRenderer {
 	private Player player;
 	private World world;
 	private Texture playerImg;
+	private Texture ballImg;
 	private SpriteBatch batch;
 	private MapRenderer mapRenderer;
 	
@@ -21,15 +22,18 @@ public class WorldRenderer {
 		this.world = world;
 		mapRenderer = new MapRenderer(dodgeBall.batch, world.getMap());
 		playerImg = new Texture("player.png");
+		ballImg = new Texture("ball.png");
 	}
 	
 	public void render(float delta) {
 		mapRenderer.render();
 		Player player = world.getPlayer();
-		Vector2 pos = world.getPlayer().getPosition();
+		Ball ball = world.getBall();
+		Vector2 posPlayer = world.getPlayer().getPosition();
+		Vector2 posBall = world.getBall().getPosition();
 		batch.begin();
-		batch.draw(playerImg, pos.x - BLOCK_SIZE/2,
-				DodgeBall.HEIGHT - pos.y - BLOCK_SIZE/2);
+		batch.draw(playerImg, posPlayer.x - BLOCK_SIZE/2, DodgeBall.HEIGHT - posPlayer.y - BLOCK_SIZE/2);
+		batch.draw(ballImg, posBall.x - BLOCK_SIZE/2, DodgeBall.HEIGHT - posBall.y - BLOCK_SIZE/2);
 		batch.end();
 	}
 	

@@ -9,15 +9,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class GameScreen extends ScreenAdapter{
-	private Texture PlayerImg;
+	private Texture playerImg;
+	private Texture ballImg;
 	private Player player;
 	private DodgeBall dodgeBall;
 	private World world;
 	private WorldRenderer worldRenderer;
+	private Ball ball;
 	
 	public GameScreen(DodgeBall dodgeBall) {
 		this.dodgeBall = dodgeBall;
-		PlayerImg = new Texture("player.png");
+		playerImg = new Texture("player.png");
+		ballImg = new Texture("ball.png");
 		world = new World(dodgeBall);
 		worldRenderer = new WorldRenderer(dodgeBall, world);
 	}
