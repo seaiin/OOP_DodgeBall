@@ -3,14 +3,15 @@ package com.mygdx.game;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player {
-	private Vector2 position;
+	public Vector2 position;
 	public static final int DIRECTION_UP = 1;
 	public static final int DIRECTION_RIGHT = 2;
 	public static final int DIRECTION_DOWN = 3;
 	public static final int DIRECTION_LEFT = 4;
 	public static final int DIRECTION_STILL = 0;
-	public static final int SPEED = 5;	
-	private int currentDirection;
+	public static final int SPEED = 5;
+	public static boolean isHoldBall = false;
+	public int currentDirection;
 	private int nextDirection;	
 	private World world;
 	private Ball ball;
@@ -55,14 +56,9 @@ public class Player {
 	private boolean canMoveInDirection(int dir) {
 		Map map = world.getMap();
 		return true;
-	}
-	
-	public boolean isHoldBall() {
-		return true;
-	}
+	}	
 	
 	private void pickBall() {
-		Ball ball = world.getBall();
-		
+		Ball ball = world.getBall();	
 	}
 }

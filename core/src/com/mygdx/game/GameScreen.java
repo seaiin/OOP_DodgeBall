@@ -35,6 +35,7 @@ public class GameScreen extends ScreenAdapter{
 	
 	public void update(float delta) {
 		updatePlayerDirection();
+		updateBallDirection();
 		world.update(delta);
 	}
 	
@@ -54,6 +55,19 @@ public class GameScreen extends ScreenAdapter{
 		}
 		else {
 			player.setNextDirection(Player.DIRECTION_STILL);
+		}
+	}
+	
+	private void updateBallDirection() {
+		Ball ball = world.getBall();
+		Player player = world.getPlayer();
+		if(ball.isReadyToHold(player) && Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
+			ball.isHolded = true;
+			player.isHoldBall = true;
+		} else if (ball.isReadyToThrow(player) && Gdx.input.isKeyPressed(Keys.SPACE)) {
+			ball.isThrowed = true;
+			player.isHoldBall = false;
+			ball.isHolded = false;
 		}
 	}
 

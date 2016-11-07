@@ -9,7 +9,7 @@ public class World {
 	World(DodgeBall dodgeBall) {
 		map = new Map();
 		player = new Player(60, 60, this);
-		ball = new Ball(60, 60, this);
+		ball = new Ball(80, 40, this);
 		this.dodgeBall = dodgeBall;
 	}
 
