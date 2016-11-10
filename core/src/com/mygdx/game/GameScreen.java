@@ -68,6 +68,8 @@ public class GameScreen extends ScreenAdapter{
 			ball.isThrowed = true;
 			player.isHoldBall = false;
 			ball.isHolded = false;
+			ball.setNextDirection(player.currentDirection);
+			ball.speed = 10;
 		}
 	}
 

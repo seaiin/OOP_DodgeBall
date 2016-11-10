@@ -55,10 +55,6 @@ public class Ball {
 		position.y += speed * DIR_OFFSETS[dir][1];
 	}
 	
-	public void throwed(int dir) {
-		speed = 10;
-	}
-	
 	public void update() {
 		Map map = world.getMap();
 		setMotion();
@@ -87,6 +83,10 @@ public class Ball {
 	
 	public boolean isReadyToThrow(Player player) {
 		return isHolded == true && player.isHoldBall == true;
+	}
+	
+	public boolean isHit(Player player) {
+		return true;
 	}
 	
 	public void setPositionX(float x) {
