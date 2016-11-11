@@ -14,7 +14,7 @@ public class Ball {
 	public static final int DIRECTION_STILL = 0;
 	public static boolean isHolded = false;
 	public static boolean isThrowed = false;
-	public static int speed;
+	public static int ballSpeed;
 	private int currentDirection;
 	private int nextDirection;
 	private World world;
@@ -43,16 +43,14 @@ public class Ball {
 		if(isHolded == true) {
 			setPositionX(player.getPosition().x + 20);
 			setPositionY(player.getPosition().y - 20);
-			
 		} else if(isThrowed == true) {
 			
 		}
 	}
 	
 	public void move(int dir) {
-		speed = 5;
-		position.x += speed * DIR_OFFSETS[dir][0];
-		position.y += speed * DIR_OFFSETS[dir][1];
+		position.x += ballSpeed * DIR_OFFSETS[dir][0];
+		position.y += ballSpeed * DIR_OFFSETS[dir][1];
 	}
 	
 	public void update() {
@@ -95,5 +93,14 @@ public class Ball {
 	
 	public void setPositionY(float y) {
 		position.y = y;
+	}
+	
+	public void setSpeed(int speed) {
+		ballSpeed = speed;
+	}
+	
+	public void setMotion(boolean holded, boolean throwed) {
+		isHolded = holded;
+		isThrowed = throwed;
 	}
 }

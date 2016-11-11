@@ -62,15 +62,18 @@ public class GameScreen extends ScreenAdapter{
 		Ball ball = world.getBall();
 		Player player = world.getPlayer();
 		if(ball.isReadyToHold(player) && Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
-			ball.isHolded = true;
+			ball.setMotion(true, false);
 			player.isHoldBall = true;
 		} else if (ball.isReadyToThrow(player) && Gdx.input.isKeyPressed(Keys.SPACE)) {
-			ball.isThrowed = true;
 			player.isHoldBall = false;
-			ball.isHolded = false;
+			ball.setMotion(false, true);
+			ball.setSpeed(30);
 			ball.setNextDirection(player.currentDirection);
-			ball.speed = 10;
+		} else if(ball.isThrowed && (ball.getPosition().x >= 1200 | ball.getPosition().y >= 800)) {
+			ball.setNextDirection(ball.DIRECTION_STILL);
+			ball.setMotion(false, false);
 		}
+			
 	}
 
 }

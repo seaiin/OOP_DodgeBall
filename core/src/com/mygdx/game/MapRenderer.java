@@ -11,7 +11,7 @@ public class MapRenderer {
 	public MapRenderer(SpriteBatch batch, Map map) {
 		this.map = map;
 		this.batch = batch;
-		//mapImg = new Texture("map.png");
+		mapImg = new Texture("map.jpg");
 	}
 	
 	public void render() {
