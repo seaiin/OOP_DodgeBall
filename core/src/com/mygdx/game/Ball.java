@@ -103,4 +103,8 @@ public class Ball {
 		isHolded = holded;
 		isThrowed = throwed;
 	}
+	
+	public boolean isOutCourt() {
+		return getPosition().y >= 1200 | getPosition().y <= 0 | getPosition().x <= 0 | getPosition().x >= 600;
+	}
 }

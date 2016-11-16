@@ -43,17 +43,29 @@ public class GameScreen extends ScreenAdapter{
 		Player player = world.getPlayer();
 		if(Gdx.input.isKeyPressed(Keys.LEFT)) {
 			player.setNextDirection(Player.DIRECTION_LEFT);
-		} 
-		else if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+		}
+		if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
 			player.setNextDirection(Player.DIRECTION_RIGHT);
 		}
-		else if(Gdx.input.isKeyPressed(Keys.UP)) {
+		if(Gdx.input.isKeyPressed(Keys.UP)) {
 			player.setNextDirection(Player.DIRECTION_UP);
 		}
-		else if(Gdx.input.isKeyPressed(Keys.DOWN)) {
+		if(Gdx.input.isKeyPressed(Keys.DOWN)) {
 			player.setNextDirection(Player.DIRECTION_DOWN);
 		}
-		else {
+		if(Gdx.input.isKeyPressed(Keys.UP) && Gdx.input.isKeyPressed(Keys.LEFT)) {
+			player.setNextDirection(Player.DIRECTION_UPLEFT);
+		}
+		if(Gdx.input.isKeyPressed(Keys.DOWN) && Gdx.input.isKeyPressed(Keys.LEFT)) {
+			player.setNextDirection(Player.DIRECTION_DOWNLEFT);
+		}
+		if(Gdx.input.isKeyPressed(Keys.UP) && Gdx.input.isKeyPressed(Keys.RIGHT)) {
+			player.setNextDirection(Player.DIRECTION_UPRIGHT);
+		}
+		if(Gdx.input.isKeyPressed(Keys.DOWN) && Gdx.input.isKeyPressed(Keys.RIGHT)) {
+			player.setNextDirection(Player.DIRECTION_DOWNRIGHT);
+		}
+		if(!Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
 			player.setNextDirection(Player.DIRECTION_STILL);
 		}
 	}
@@ -68,8 +80,12 @@ public class GameScreen extends ScreenAdapter{
 			player.isHoldBall = false;
 			ball.setMotion(false, true);
 			ball.setSpeed(30);
-			ball.setNextDirection(player.currentDirection);
-		} else if(ball.isThrowed && (ball.getPosition().x >= 1200 | ball.getPosition().y >= 800)) {
+			if(player.currentDirection != ball.DIRECTION_STILL) {
+				ball.setNextDirection(player.currentDirection);
+			} else {
+				ball.setMotion(false, false);
+			}
+		} else if(ball.isThrowed && ball.isOutCourt()) {
 			ball.setNextDirection(ball.DIRECTION_STILL);
 			ball.setMotion(false, false);
 		}

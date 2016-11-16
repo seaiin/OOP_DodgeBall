@@ -13,7 +13,6 @@ public class WorldRenderer {
 	private Texture ballImg;
 	private Texture mapImg;
 	private SpriteBatch batch;
-	private MapRenderer mapRenderer;
 	
 	public static final int BLOCK_SIZE = 40;
 	
@@ -21,14 +20,12 @@ public class WorldRenderer {
 		this.dodgeBall = dodgeball;
 		batch = dodgeBall.batch;
 		this.world = world;
-		mapRenderer = new MapRenderer(dodgeBall.batch, world.getMap());
 		playerImg = new Texture("player.png");
 		ballImg = new Texture("ball.png");
 		mapImg = new Texture("map.jpg");
 	}
 	
 	public void render(float delta) {
-		mapRenderer.render();
 		Player player = world.getPlayer();
 		Ball ball = world.getBall();
 		Vector2 posPlayer = world.getPlayer().getPosition();

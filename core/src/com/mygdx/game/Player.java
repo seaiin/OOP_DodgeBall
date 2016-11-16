@@ -8,6 +8,10 @@ public class Player {
 	public static final int DIRECTION_RIGHT = 2;
 	public static final int DIRECTION_DOWN = 3;
 	public static final int DIRECTION_LEFT = 4;
+	public static final int DIRECTION_UPLEFT = 5;
+	public static final int DIRECTION_DOWNLEFT = 6;
+	public static final int DIRECTION_UPRIGHT = 7;
+	public static final int DIRECTION_DOWNRIGHT = 8;
 	public static final int DIRECTION_STILL = 0;
 	public static final int SPEED = 5;
 	public static boolean isHoldBall = false;
@@ -16,11 +20,15 @@ public class Player {
 	private World world;
 	private Ball ball;
 	private static final int [][] DIR_OFFSETS = new int[][] {
-		{0,0},
-		{0,-1},
-		{1,0},
-		{0,1},
-		{-1,0}
+		{0, 0},
+		{0, -1},
+		{1, 0},
+		{0, 1},
+		{-1, 0},
+		{-1,-1},
+		{-1, 1},
+		{1, -1},
+		{1, 1}
 	};
 	
 	public Player(int x, int y, World world) {
