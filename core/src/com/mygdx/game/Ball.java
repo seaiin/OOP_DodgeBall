@@ -126,6 +126,7 @@ public class Ball {
 					setPositionY(player.getPosition().y - 20);
 				}
 			}
+			
 			for(Player player : players2) {
 				if(player.isHoldBall == true) {
 					setPositionX(player.getPosition().x + 20);

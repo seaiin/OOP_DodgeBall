@@ -13,14 +13,14 @@ public class World {
 	private Array<Player> players1;
 	private Array<Player> players2;
 	private static final int[][] PLAYERS1_POSITION = new int [][] {
-		{100,100},
-		{100,200},
-		{100,300}
+		{250,260},
+		{220,360},
+		{160,160}
 	};
 	private static final int[][] PLAYERS2_POSITION = new int [][] {
-		{500,100},
-		{500,200},
-		{500,300}
+		{900,260},
+		{940,360},
+		{1000,160}
 	}; 
 	
 	World(DodgeBall dodgeBall) {
