@@ -55,6 +55,7 @@ public class World {
 		for(Player player : players2) {
 			player.update();
 		}
+		removePlayer();
 		ball.update();
 	}
 
@@ -74,4 +75,14 @@ public class World {
 		}
 	}
 	
+	private void removePlayer() {
+		for(int i = 0 ; i < 3 ; i++) {
+			if(players1.get(i).isDead()){
+				players1.get(i).position.y += 10;
+			}
+			if(players2.get(i).isDead()){
+				players2.get(i).position.y += 10;
+			}
+		}
+	}
 }

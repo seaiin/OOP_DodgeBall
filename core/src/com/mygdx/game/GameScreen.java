@@ -157,6 +157,7 @@ public class GameScreen extends ScreenAdapter{
 				ball.setNextDirection(ball.DIRECTION_STILL);
 				ball.setMotion(false, false);
 				ball.isHitPlayer = true;
+				player.HP -= 25;
 			}
 		}
 		if(ball.isHitPlayer) {
@@ -192,6 +193,7 @@ public class GameScreen extends ScreenAdapter{
 				ball.setNextDirection(ball.DIRECTION_STILL);
 				ball.setMotion(false, false);
 				ball.isHitPlayer = true;
+				player.HP -= 25;
 			}
 		}
 		if(ball.isHitPlayer) {

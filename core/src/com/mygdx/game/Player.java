@@ -14,6 +14,7 @@ public class Player {
 	public static final int DIRECTION_DOWNRIGHT = 8;
 	public static final int DIRECTION_STILL = 0;
 	public static final int SPEED = 5;
+	public int HP = 100;
 	public boolean isHoldBall = false;
 	public boolean isSelected = false;
 	public boolean isThrowBall = false;
@@ -67,4 +68,8 @@ public class Player {
 		Map map = world.getMap();
 		return true;
 	}	
+	
+	public boolean isDead() {
+		return HP <= 0;
+	}
 }

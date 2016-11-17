@@ -54,9 +54,6 @@ public class Ball {
 	
 	public void setMotion() {
 		setHoldMotion();
-		if(isThrowed == true) {
-			
-		}
 	}
 	
 	public void move(int dir) {
