@@ -43,8 +43,8 @@ public class Ball {
 		currentDirection = DIRECTION_STILL;
 		nextDirection = DIRECTION_STILL;
 		this.world = world;
-		players1 = world.getPlayers1();
-		players2 = world.getPlayers2();
+		this.players1 = world.getPlayers1();
+		this.players2 = world.getPlayers2();
 	}
 	
 	public Vector2 getPosition() {

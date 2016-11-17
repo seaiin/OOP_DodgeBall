@@ -14,8 +14,8 @@ public class Player {
 	public static final int DIRECTION_DOWNRIGHT = 8;
 	public static final int DIRECTION_STILL = 0;
 	public static final int SPEED = 5;
-	public static boolean isHoldBall = false;
-	public static boolean isSelected = true;
+	public boolean isHoldBall = false;
+	public boolean isSelected = false;
 	public int currentDirection;
 	private int nextDirection;	
 	private World world;

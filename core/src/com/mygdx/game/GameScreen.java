@@ -18,6 +18,8 @@ public class GameScreen extends ScreenAdapter{
 	private World world;
 	private WorldRenderer worldRenderer;
 	private Ball ball;
+	private int selectedPlayer1 = 0;
+	private int selectedPlayer2 = 0;
 	
 	public GameScreen(DodgeBall dodgeBall) {
 		this.dodgeBall = dodgeBall;
@@ -46,6 +48,8 @@ public class GameScreen extends ScreenAdapter{
 		Array<Player> players2 = world.getPlayers2();
 		updatePlayers1Direction();
 		updatePlayers2Direction();
+		selectPlayer1();
+		selectPlayer2();
 	}
 	
 	private void updateBallDirection() {
@@ -87,6 +91,8 @@ public class GameScreen extends ScreenAdapter{
 				if(!Gdx.input.isKeyPressed(Keys.LEFT) && !Gdx.input.isKeyPressed(Keys.RIGHT) && !Gdx.input.isKeyPressed(Keys.UP) && !Gdx.input.isKeyPressed(Keys.DOWN)) {
 					player.setNextDirection(Player.DIRECTION_STILL);
 				}
+			} else {
+				player.setNextDirection(Player.DIRECTION_STILL);
 			}
 		}
 	}
@@ -121,6 +127,8 @@ public class GameScreen extends ScreenAdapter{
 				if(!Gdx.input.isKeyPressed(Keys.A) && !Gdx.input.isKeyPressed(Keys.D) && !Gdx.input.isKeyPressed(Keys.W) && !Gdx.input.isKeyPressed(Keys.S)) {
 					player.setNextDirection(Player.DIRECTION_STILL);
 				}
+			} else {
+				player.setNextDirection(Player.DIRECTION_STILL);
 			}
 		}
 	}
@@ -157,6 +165,7 @@ public class GameScreen extends ScreenAdapter{
 			} else if (ball.isReadyToThrow(player) && Gdx.input.isKeyPressed(Keys.SPACE)) {
 				player.isHoldBall = false;
 				ball.setMotion(false, true);
+				
 				ball.setSpeed(30);
 				if(player.currentDirection != ball.DIRECTION_STILL) {
 					ball.setNextDirection(player.currentDirection);
@@ -168,5 +177,55 @@ public class GameScreen extends ScreenAdapter{
 				ball.setMotion(false, false);
 			}
 		}	
+	}
+	
+	private void selectPlayer1() {
+		players1 = world.getPlayers1();
+		if(selectedPlayer1 < 3 &&Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT)) {
+			selectedPlayer1++;
+		}
+		if(selectedPlayer1 == 3) {
+			selectedPlayer1 = 0;
+		}
+		switch(selectedPlayer1) {
+			case 0:	players1.get(0).isSelected = true;
+					players1.get(1).isSelected = false;
+					players1.get(2).isSelected = false;
+					break;
+			case 1:	players1.get(1).isSelected = true;
+					players1.get(0).isSelected = false;
+					players1.get(2).isSelected = false;
+					break;
+			case 2:	players1.get(2).isSelected = true;
+					players1.get(0).isSelected = false;
+					players1.get(1).isSelected = false;
+					break;
+			default: break;
+		}
+	}
+	
+	private void selectPlayer2() {
+		players2 = world.getPlayers2();
+		if(selectedPlayer2 < 3 && Gdx.input.isKeyJustPressed(Keys.TAB)) {
+			selectedPlayer2++;
+		}
+		if(selectedPlayer2 == 3) {
+			selectedPlayer2 = 0;
+		}
+		switch(selectedPlayer2) {
+		case 0:	players2.get(0).isSelected = true;
+				players2.get(1).isSelected = false;
+				players2.get(2).isSelected = false;
+				break;
+		case 1:	players2.get(1).isSelected = true;
+				players2.get(0).isSelected = false;
+				players2.get(2).isSelected = false;
+				break;
+		case 2:	players2.get(2).isSelected = true;
+				players2.get(0).isSelected = false;
+				players2.get(1).isSelected = false;
+				break;
+		default: break;
+		}
 	}
 }
