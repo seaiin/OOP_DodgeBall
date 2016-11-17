@@ -71,5 +71,6 @@ public class Player {
 	
 	public boolean isDead() {
 		return HP <= 0;
+		
 	}
 }

@@ -56,13 +56,13 @@ public class GameScreen extends ScreenAdapter{
 		Ball ball = world.getBall();
 		Array<Player> players1 = world.getPlayers1();
 		Array<Player> players2 = world.getPlayers2();
-		updateBallWithPlayers1();
 		updateBallWithPlayers2();
+		updateBallWithPlayers1();
 	}
 	
-	private void updatePlayers1Direction() {
-		players1 = world.getPlayers1();
-		for(Player player : players1) {
+	private void updatePlayers2Direction() {
+		players2 = world.getPlayers2();
+		for(Player player : players2) {
 			if(player.isSelected) {
 				if(Gdx.input.isKeyPressed(Keys.LEFT)) {
 					player.setNextDirection(Player.DIRECTION_LEFT);
@@ -96,9 +96,9 @@ public class GameScreen extends ScreenAdapter{
 			}
 		}
 	}
-	private void updatePlayers2Direction() {
-		players2 = world.getPlayers2();
-		for(Player player : players2) {
+	private void updatePlayers1Direction() {
+		players1 = world.getPlayers1();
+		for(Player player : players1) {
 			if(player.isSelected) {
 				if(Gdx.input.isKeyPressed(Keys.A)) {
 					player.setNextDirection(Player.DIRECTION_LEFT);
@@ -133,50 +133,14 @@ public class GameScreen extends ScreenAdapter{
 		}
 	}
 	
-	private void updateBallWithPlayers1() {
-		players1 = world.getPlayers1();
+	private void updateBallWithPlayers2() {
+		players2 = world.getPlayers2();
 		ball = world.getBall();
-		for(Player player : players1) {
-			if(ball.isReadyToHold(player) && Gdx.input.isKeyPressed(Keys.CONTROL_RIGHT)) {
+		for(Player player : players2) {
+			if(ball.isReadyToHold(player) && Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT)) {
 				ball.setMotion(true, false);
 				player.isHoldBall = true;
 			} else if(ball.isReadyToThrow(player) && Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT)) {
-				player.isHoldBall = false;
-				player.isThrowBall = true;
-				ball.setMotion(false, true);
-				ball.setSpeed(30);
-				if(player.currentDirection != ball.DIRECTION_STILL) {
-					ball.setNextDirection(player.currentDirection);
-				} else {
-					ball.setMotion(false, false);
-				}
-			} else if(ball.isThrowed && ball.isOutCourt()) {
-				ball.setNextDirection(ball.DIRECTION_STILL);
-				ball.setMotion(false, false);
-			} else if(ball.isThrowed && ball.isHit(player)) {
-				ball.setNextDirection(ball.DIRECTION_STILL);
-				ball.setMotion(false, false);
-				ball.isHitPlayer = true;
-				player.HP -= 25;
-			}
-		}
-		if(ball.isHitPlayer) {
-			for(Player throwPlayer : players1) {
-				if(throwPlayer.isThrowBall == true) {
-					throwPlayer.isThrowBall = false;
-					ball.isHitPlayer = false;
-				}
-			}
-		}
-	}
-	
-	private void updateBallWithPlayers2() {
-		players2 = world.getPlayers2();
-		for(Player player : players2) {
-			if(ball.isReadyToHold(player) && Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
-				ball.setMotion(true, false);
-				player.isHoldBall = true;
-			} else if (ball.isReadyToThrow(player) && Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
 				player.isHoldBall = false;
 				player.isThrowBall = true;
 				ball.setMotion(false, true);
@@ -206,9 +170,45 @@ public class GameScreen extends ScreenAdapter{
 		}
 	}
 	
+	private void updateBallWithPlayers1() {
+		players1 = world.getPlayers1();
+		for(Player player : players1) {
+			if(ball.isReadyToHold(player) && Gdx.input.isKeyJustPressed(Keys.SHIFT_LEFT)) {
+				ball.setMotion(true, false);
+				player.isHoldBall = true;
+			} else if (ball.isReadyToThrow(player) && Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
+				player.isHoldBall = false;
+				player.isThrowBall = true;
+				ball.setMotion(false, true);
+				ball.setSpeed(30);
+				if(player.currentDirection != ball.DIRECTION_STILL) {
+					ball.setNextDirection(player.currentDirection);
+				} else {
+					ball.setMotion(false, false);
+				}
+			} else if(ball.isThrowed && ball.isOutCourt()) {
+				ball.setNextDirection(ball.DIRECTION_STILL);
+				ball.setMotion(false, false);
+			} else if(ball.isThrowed && ball.isHit(player)) {
+				ball.setNextDirection(ball.DIRECTION_STILL);
+				ball.setMotion(false, false);
+				ball.isHitPlayer = true;
+				player.HP -= 25;
+			}
+		}
+		if(ball.isHitPlayer) {
+			for(Player throwPlayer : players1) {
+				if(throwPlayer.isThrowBall == true) {
+					throwPlayer.isThrowBall = false;
+					ball.isHitPlayer = false;
+				}
+			}
+		}
+	}
+	
 	private void selectPlayer1() {
 		players1 = world.getPlayers1();
-		if(selectedPlayer1 < 3 &&Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT)) {
+		if(selectedPlayer1 < 3 &&Gdx.input.isKeyJustPressed(Keys.TAB)) {
 			selectedPlayer1++;
 		}
 		if(selectedPlayer1 == 3) {
@@ -233,7 +233,7 @@ public class GameScreen extends ScreenAdapter{
 	
 	private void selectPlayer2() {
 		players2 = world.getPlayers2();
-		if(selectedPlayer2 < 3 && Gdx.input.isKeyJustPressed(Keys.TAB)) {
+		if(selectedPlayer2 < 3 && Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT)) {
 			selectedPlayer2++;
 		}
 		if(selectedPlayer2 == 3) {
