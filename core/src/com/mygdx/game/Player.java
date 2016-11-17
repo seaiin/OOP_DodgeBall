@@ -15,20 +15,21 @@ public class Player {
 	public static final int DIRECTION_STILL = 0;
 	public static final int SPEED = 5;
 	public static boolean isHoldBall = false;
+	public static boolean isSelected = true;
 	public int currentDirection;
 	private int nextDirection;	
 	private World world;
 	private Ball ball;
 	private static final int [][] DIR_OFFSETS = new int[][] {
 		{0, 0},
-		{0, -1},
-		{1, 0},
 		{0, 1},
+		{1, 0},
+		{0, -1},
 		{-1, 0},
-		{-1,-1},
 		{-1, 1},
-		{1, -1},
-		{1, 1}
+		{-1, -1},
+		{1, 1},
+		{1, -1}
 	};
 	
 	public Player(int x, int y, World world) {

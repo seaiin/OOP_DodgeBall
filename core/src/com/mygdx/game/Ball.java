@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 public class Ball {
 	
@@ -11,6 +12,10 @@ public class Ball {
 	public static final int DIRECTION_RIGHT = 2;
 	public static final int DIRECTION_DOWN = 3;
 	public static final int DIRECTION_LEFT = 4;
+	public static final int DIRECTION_UPLEFT = 5;
+	public static final int DIRECTION_DOWNLEFT = 6;
+	public static final int DIRECTION_UPRIGHT = 7;
+	public static final int DIRECTION_DOWNRIGHT = 8;
 	public static final int DIRECTION_STILL = 0;
 	public static boolean isHolded = false;
 	public static boolean isThrowed = false;
@@ -19,12 +24,18 @@ public class Ball {
 	private int nextDirection;
 	private World world;
 	private Player player;
+	private Array<Player> players1;
+	private Array<Player> players2;
 	private static final int[][] DIR_OFFSETS = new int [][] {
 		{0,0},
-		{0,-1},
-		{1,0},
 		{0,1},
-		{-1,0}
+		{1,0},
+		{0,-1},
+		{-1,0},
+		{-1,1},
+		{-1,-1},
+		{1,1},
+		{1,-1}
 	};
 	
 	public Ball(int x, int y, World world) {
@@ -32,7 +43,8 @@ public class Ball {
 		currentDirection = DIRECTION_STILL;
 		nextDirection = DIRECTION_STILL;
 		this.world = world;
-		player = world.getPlayer();
+		players1 = world.getPlayers1();
+		players2 = world.getPlayers2();
 	}
 	
 	public Vector2 getPosition() {
@@ -40,10 +52,8 @@ public class Ball {
 	}
 	
 	public void setMotion() {
-		if(isHolded == true) {
-			setPositionX(player.getPosition().x + 20);
-			setPositionY(player.getPosition().y - 20);
-		} else if(isThrowed == true) {
+		setHoldMotion();
+		if(isThrowed == true) {
 			
 		}
 	}
@@ -74,7 +84,7 @@ public class Ball {
 	}
 	
 	public boolean isReadyToHold(Player player) {
-		return getPosition().x >= player.getPosition().x - 10 
+		return 	getPosition().x >= player.getPosition().x - 10
 				&& getPosition().x <= player.getPosition().x + 10
 				&& isHolded != true && isThrowed != true && player.isHoldBall == false;
 	}
@@ -105,6 +115,23 @@ public class Ball {
 	}
 	
 	public boolean isOutCourt() {
-		return getPosition().y >= 1200 | getPosition().y <= 0 | getPosition().x <= 0 | getPosition().x >= 600;
+		return (getPosition().y >= 500 | getPosition().y <= 100) | (getPosition().x <= 100 | getPosition().x >= 1100);
+	}
+	
+	private void setHoldMotion() {
+		if(isHolded == true) {
+			for(Player player : players1) {
+				if(player.isHoldBall == true) {
+					setPositionX(player.getPosition().x + 20);
+					setPositionY(player.getPosition().y - 20);
+				}
+			}
+			for(Player player : players2) {
+				if(player.isHoldBall == true) {
+					setPositionX(player.getPosition().x + 20);
+					setPositionY(player.getPosition().y - 20);
+				}
+			}
+		}
 	}
 }
