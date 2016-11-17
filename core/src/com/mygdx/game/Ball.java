@@ -19,6 +19,7 @@ public class Ball {
 	public static final int DIRECTION_STILL = 0;
 	public static boolean isHolded = false;
 	public static boolean isThrowed = false;
+	public static boolean isHitPlayer = false;
 	public static int ballSpeed;
 	private int currentDirection;
 	private int nextDirection;
@@ -84,8 +85,10 @@ public class Ball {
 	}
 	
 	public boolean isReadyToHold(Player player) {
-		return 	getPosition().x >= player.getPosition().x - 10
-				&& getPosition().x <= player.getPosition().x + 10
+		return 	getPosition().x >= player.getPosition().x - 20
+				&& getPosition().x <= player.getPosition().x + 20
+				&& getPosition().y >= player.getPosition().y - 20
+				&& getPosition().y <= player.getPosition().y + 20
 				&& isHolded != true && isThrowed != true && player.isHoldBall == false;
 	}
 	
@@ -94,7 +97,12 @@ public class Ball {
 	}
 	
 	public boolean isHit(Player player) {
-		return true;
+		return 	getPosition().x >= player.getPosition().x - 20
+				&& getPosition().x <= player.getPosition().x + 20
+				&& getPosition().y >= player.getPosition().y - 20
+				&& getPosition().y <= player.getPosition().y + 20
+				&& isHolded != true && isThrowed == true 
+				&& player.isHoldBall == false && player.isThrowBall == false;
 	}
 	
 	public void setPositionX(float x) {

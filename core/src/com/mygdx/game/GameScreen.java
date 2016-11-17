@@ -137,11 +137,12 @@ public class GameScreen extends ScreenAdapter{
 		players1 = world.getPlayers1();
 		ball = world.getBall();
 		for(Player player : players1) {
-			if(ball.isReadyToHold(player) && Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
+			if(ball.isReadyToHold(player) && Gdx.input.isKeyPressed(Keys.CONTROL_RIGHT)) {
 				ball.setMotion(true, false);
 				player.isHoldBall = true;
-			} else if(ball.isReadyToThrow(player) && Gdx.input.isKeyPressed(Keys.SPACE)) {
+			} else if(ball.isReadyToThrow(player) && Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT)) {
 				player.isHoldBall = false;
+				player.isThrowBall = true;
 				ball.setMotion(false, true);
 				ball.setSpeed(30);
 				if(player.currentDirection != ball.DIRECTION_STILL) {
@@ -152,8 +153,20 @@ public class GameScreen extends ScreenAdapter{
 			} else if(ball.isThrowed && ball.isOutCourt()) {
 				ball.setNextDirection(ball.DIRECTION_STILL);
 				ball.setMotion(false, false);
+			} else if(ball.isThrowed && ball.isHit(player)) {
+				ball.setNextDirection(ball.DIRECTION_STILL);
+				ball.setMotion(false, false);
+				ball.isHitPlayer = true;
 			}
-		}	
+		}
+		if(ball.isHitPlayer) {
+			for(Player throwPlayer : players1) {
+				if(throwPlayer.isThrowBall == true) {
+					throwPlayer.isThrowBall = false;
+					ball.isHitPlayer = false;
+				}
+			}
+		}
 	}
 	
 	private void updateBallWithPlayers2() {
@@ -162,10 +175,10 @@ public class GameScreen extends ScreenAdapter{
 			if(ball.isReadyToHold(player) && Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
 				ball.setMotion(true, false);
 				player.isHoldBall = true;
-			} else if (ball.isReadyToThrow(player) && Gdx.input.isKeyPressed(Keys.SPACE)) {
+			} else if (ball.isReadyToThrow(player) && Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
 				player.isHoldBall = false;
+				player.isThrowBall = true;
 				ball.setMotion(false, true);
-				
 				ball.setSpeed(30);
 				if(player.currentDirection != ball.DIRECTION_STILL) {
 					ball.setNextDirection(player.currentDirection);
@@ -175,8 +188,20 @@ public class GameScreen extends ScreenAdapter{
 			} else if(ball.isThrowed && ball.isOutCourt()) {
 				ball.setNextDirection(ball.DIRECTION_STILL);
 				ball.setMotion(false, false);
+			} else if(ball.isThrowed && ball.isHit(player)) {
+				ball.setNextDirection(ball.DIRECTION_STILL);
+				ball.setMotion(false, false);
+				ball.isHitPlayer = true;
 			}
-		}	
+		}
+		if(ball.isHitPlayer) {
+			for(Player throwPlayer : players2) {
+				if(throwPlayer.isThrowBall == true) {
+					throwPlayer.isThrowBall = false;
+					ball.isHitPlayer = false;
+				}
+			}
+		}
 	}
 	
 	private void selectPlayer1() {

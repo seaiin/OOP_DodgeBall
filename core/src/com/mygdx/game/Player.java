@@ -16,6 +16,7 @@ public class Player {
 	public static final int SPEED = 5;
 	public boolean isHoldBall = false;
 	public boolean isSelected = false;
+	public boolean isThrowBall = false;
 	public int currentDirection;
 	private int nextDirection;	
 	private World world;
@@ -66,8 +67,4 @@ public class Player {
 		Map map = world.getMap();
 		return true;
 	}	
-	
-	private void pickBall() {
-		Ball ball = world.getBall();	
-	}
 }
