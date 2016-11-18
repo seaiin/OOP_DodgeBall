@@ -137,10 +137,10 @@ public class GameScreen extends ScreenAdapter{
 		players2 = world.getPlayers2();
 		ball = world.getBall();
 		for(Player player : players2) {
-			if(ball.isReadyToHold(player) && Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT)) {
+			if(ball.isReadyToHold(player) && Gdx.input.isKeyPressed(Keys.CONTROL_RIGHT)) {
 				ball.setMotion(true, false);
 				player.isHoldBall = true;
-			} else if(ball.isReadyToThrow(player) && Gdx.input.isKeyJustPressed(Keys.CONTROL_RIGHT)) {
+			} else if(ball.isReadyToThrow(player) && Gdx.input.isKeyPressed(Keys.CONTROL_RIGHT)) {
 				player.isHoldBall = false;
 				player.isThrowBall = true;
 				ball.setMotion(false, true);
@@ -173,7 +173,7 @@ public class GameScreen extends ScreenAdapter{
 	private void updateBallWithPlayers1() {
 		players1 = world.getPlayers1();
 		for(Player player : players1) {
-			if(ball.isReadyToHold(player) && Gdx.input.isKeyJustPressed(Keys.SHIFT_LEFT)) {
+			if(ball.isReadyToHold(player) && Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
 				ball.setMotion(true, false);
 				player.isHoldBall = true;
 			} else if (ball.isReadyToThrow(player) && Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
